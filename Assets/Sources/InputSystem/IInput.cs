@@ -4,5 +4,7 @@ namespace Sources.InputSystem
     {
         float Horizontal { get; }
         float Vertical { get; }
+        float MouseX { get; }
+        float MouseY { get; }
     }
 }

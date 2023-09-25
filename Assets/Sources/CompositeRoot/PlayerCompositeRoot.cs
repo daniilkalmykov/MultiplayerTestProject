@@ -16,6 +16,11 @@ namespace Sources.CompositeRoot
         private PlayerView _playerView;
         private Rigidbody _rigidbody;
 
+        private void Update()
+        {
+            _input?.Update();
+        }
+
         public override void Compose()
         {
             _playerView = GetComponent<PlayerView>();
