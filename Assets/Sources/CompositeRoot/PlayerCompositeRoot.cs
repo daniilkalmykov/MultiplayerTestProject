@@ -10,11 +10,14 @@ namespace Sources.CompositeRoot
     internal sealed class PlayerCompositeRoot : CompositeRoot
     {
         [SerializeField] private float _speed;
+        [SerializeField] private CameraView _cameraView;
 
         private Movement _movement;
         private PCInput _input;
         private PlayerView _playerView;
         private Rigidbody _rigidbody;
+
+        public IInput Input => _input;
 
         private void Update()
         {
@@ -29,7 +32,7 @@ namespace Sources.CompositeRoot
             _input = new PCInput();
             _movement = new Movement(_speed);
 
-            _playerView.Init(_movement, _input, _rigidbody);
+            _playerView.Init(_movement, _input, _rigidbody, _cameraView);
         }
     }
 }

@@ -12,20 +12,23 @@ namespace Sources.Views
         private IMovable _movable;
         private IInput _input;
         private Rigidbody _rigidbody;
+        private CameraView _camera;
 
         private void Update()
         {
-            if (_input == null || _movable == null)
+            if (_input == null || _movable == null || _camera == null)
                 return;
 
             Move();
+            Rotate();
         }
 
-        public void Init(IMovable movable, IInput input, Rigidbody rigidbody)
+        public void Init(IMovable movable, IInput input, Rigidbody rigidbody, CameraView cameraView)
         {
             _movable = movable ?? throw new ArgumentNullException();
             _input = input ?? throw new ArgumentNullException();
             _rigidbody = rigidbody;
+            _camera = cameraView;
         }
         
         private void Move()
@@ -35,6 +38,11 @@ namespace Sources.Views
                 _movable.Speed * cameraRelativeMovement.z);
 
             _rigidbody.velocity = direction;
+        }
+        
+        private void Rotate()
+        {
+            transform.Rotate(Vector3.up * (_input.MouseX * _camera.MouseSensitivity));
         }
     }
 }
