@@ -19,7 +19,7 @@ namespace Sources.Views
 
         private void Update()
         {
-            if (_input == null || _movable == null || _camera == null || _animator != null)
+            if (_input == null || _movable == null)
                 return;
 
             _animator.SetFloat(_speed, _rigidbody.velocity.magnitude);
