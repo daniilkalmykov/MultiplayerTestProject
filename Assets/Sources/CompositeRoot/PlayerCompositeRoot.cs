@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Sources.CompositeRoot
 {
+    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(PlayerView))]
     internal sealed class PlayerCompositeRoot : CompositeRoot
@@ -16,6 +17,7 @@ namespace Sources.CompositeRoot
         private PCInput _input;
         private PlayerView _playerView;
         private Rigidbody _rigidbody;
+        private Animator _animator;
 
         public IInput Input => _input;
 
@@ -28,11 +30,12 @@ namespace Sources.CompositeRoot
         {
             _playerView = GetComponent<PlayerView>();
             _rigidbody = GetComponent<Rigidbody>();
+            _animator = GetComponent<Animator>();
             
             _input = new PCInput();
             _movement = new Movement(_speed);
 
-            _playerView.Init(_movement, _input, _rigidbody, _cameraView);
+            _playerView.Init(_movement, _input, _rigidbody, _cameraView, _animator);
         }
     }
 }

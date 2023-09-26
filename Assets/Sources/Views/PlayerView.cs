@@ -9,26 +9,32 @@ namespace Sources.Views
 {
     internal sealed class PlayerView : MonoBehaviour
     {
+        private readonly int _speed = Animator.StringToHash("Speed");
+        
         private IMovable _movable;
         private IInput _input;
         private Rigidbody _rigidbody;
         private CameraView _camera;
+        private Animator _animator;
 
         private void Update()
         {
-            if (_input == null || _movable == null || _camera == null)
+            if (_input == null || _movable == null || _camera == null || _animator != null)
                 return;
 
+            _animator.SetFloat(_speed, _rigidbody.velocity.magnitude);
+            
             Move();
             Rotate();
         }
 
-        public void Init(IMovable movable, IInput input, Rigidbody rigidbody, CameraView cameraView)
+        public void Init(IMovable movable, IInput input, Rigidbody rigidbody, CameraView cameraView, Animator animator)
         {
             _movable = movable ?? throw new ArgumentNullException();
             _input = input ?? throw new ArgumentNullException();
             _rigidbody = rigidbody;
             _camera = cameraView;
+            _animator = animator;
         }
         
         private void Move()
